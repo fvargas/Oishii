@@ -1,0 +1,45 @@
+<div class="event">
+    <div class="row valign-wrapper event-header">
+        <div class="col s9">
+            <h5>{{ event.title }}</h5>
+        </div>
+        <div class="col s3">
+            <i id="event_{{ event.id }}" class="{% if is_starred %}starred{% else %}unstarred{% endif %} medium mdi-action-star-rate left"></i>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s5">
+            <h6>Host:</h6> {{ event.host }}
+        </div>
+        <div class="col s7">
+            <h6>Location:</h6> {{ event.location_description }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <h6>Description:</h6>
+            {{ event.event_description }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <h6>Food available:</h6> {{ event.menu_description }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <h6>Start:</h6> {{ event.start_date }}
+        </div>
+        <div class="col s6">
+            <h6>End:</h6> {{ event.end_date }}
+        </div>
+    </div>
+    <div class="row event-footer">
+        <div class="col s5">
+            <h6>Stars:</h6> <span id="event_stars_{{ event.id }}">{{ event.stars }}</span>
+        </div>
+        <div class="col s7">
+            <h6>Creator:</h6> {{ event.user.username }}
+        </div>
+    </div>
+</div>

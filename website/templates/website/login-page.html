@@ -1,0 +1,29 @@
+{% extends 'website/base.html' %}
+
+{% block website_scripts %}
+    {% load staticfiles %}
+        <script src="{% static 'website/js/oishii.js' %}" defer></script>
+        <script src="{% static 'website/js/login-page.js' %}" defer></script>
+{% endblock website_scripts %}
+
+{% block content %}
+        <div id="login-page" class="container">
+            <form id="login-page-form">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="login_page_username" type="text" class="validate" autofocus>
+                        <label for="login_page_username">Username</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="login_page_password" type="password" class="validate">
+                        <label for="login_page_password">Password</label>
+                    </div>
+                </div>
+                <div class="row center-align">
+                    <button type="submit" id="login-submit" class="waves-effect waves-light btn-large col s12 oishii-indigo">Login</button>
+                </div>
+            </form>
+        </div>
+{% endblock content %}

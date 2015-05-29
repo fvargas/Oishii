@@ -1,0 +1,15 @@
+{% extends 'website/base.html' %}
+
+{% block website_scripts %}
+    {% load staticfiles %}
+        <script src="{% static 'modernizr/js/modernizr.js' %}" defer></script>
+        <script src="{% static 'website/js/map.js' %}" defer></script>
+        <script src="{% static 'website/js/oishii.js' %}" defer></script>
+{% endblock website_scripts %}
+
+{% block content %}
+        <div id="map-container">
+            <div id="map-canvas"></div>
+        </div>
+        {% include 'website/create-event.html' %}
+{% endblock content %}

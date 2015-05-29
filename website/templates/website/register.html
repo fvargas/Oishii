@@ -1,0 +1,48 @@
+{% extends 'website/base.html' %}
+
+{% block website_scripts %}
+    {% load staticfiles %}
+        <script src="{% static 'website/js/oishii.js' %}" defer></script>
+{% endblock website_scripts %}
+
+{% block content %}
+        <div id="registration" class="container">
+            <form id="register-form">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="{{ form.first_name.id_for_label }}" type="text" class="validate" autofocus>
+                        <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="{{ form.last_name.id_for_label }}" type="text" class="validate">
+                        <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="{{ form.username.id_for_label }}" type="text" class="validate">
+                        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="{{ form.email.id_for_label }}" type="email" class="validate">
+                        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="{{ form.password.id_for_label }}" type="password" class="validate">
+                        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="{{ form.confirm_password.id_for_label }}" type="password" class="validate">
+                        <label for="{{ form.confirm_password.id_for_label }}">{{ form.confirm_password.label }}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="submit" class="waves-effect waves-light btn-large col s12 oishii-indigo">Sign Up</button>
+                </div>
+            </form>
+        </div>
+{% endblock content %}

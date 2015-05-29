@@ -1,0 +1,57 @@
+        <!-- Modal Structure -->
+        <div id="create-event" class="modal indigo lighten-5">
+            <form id="event-form">
+                <div class="modal-content row">
+                    <div class="col s12">
+                        <div class="row">
+                            <div id="event-header" class="card-panel white-text valign-wrapper oishii-blue">
+                                <h4>New Event</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="{{ event_form.title.id_for_label }}" type="text" class="validate" autofocus>
+                                <label for="{{ event_form.title.id_for_label }}">{{ event_form.title.label }}</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="{{ event_form.host.id_for_label }}" type="text" class="validate">
+                                <label for="{{ event_form.host.id_for_label }}">{{ event_form.host.label }}</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="{{ event_form.menu_description.id_for_label }}" type="text" class="validate" placeholder="Cookies, pizza, soda pop">
+                                <label for="{{ event_form.menu_description.id_for_label }}">{{ event_form.menu_description.label }}</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="{{ event_form.location_description.id_for_label }}" type="text" class="validate" placeholder="Rashid Auditorium, GHC 4401">
+                                <label for="{{ event_form.location_description.id_for_label }}">{{ event_form.location_description.label }}</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="{{ event_form.event_description.id_for_label }}" class="materialize-textarea validate"></textarea>
+                                <label for="{{ event_form.event_description.id_for_label }}">{{ event_form.event_description.label }}</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="{{ event_form.start_date.id_for_label }}" type="date" class="datepicker validate">
+                                <label for="{{ event_form.start_date.id_for_label }}">{{ event_form.start_date.label }}</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="{{ event_form.end_date.id_for_label }}" type="date" class="datepicker validate">
+                                <label for="{{ event_form.end_date.id_for_label }}">{{ event_form.end_date.label }}</label>
+                            </div>
+                        </div>
+                        <input id="{{ event_form.latitude.id_for_label }}" type="hidden">
+                        <input id="{{ event_form.longitude.id_for_label }}" type="hidden">
+                    </div>
+                </div>
+                <div class="modal-footer indigo lighten-5">
+                    <div class="row center-align">
+                        <button type="submit" id="event-submit" class="waves-effect waves-light btn-large col s11 oishii-blue">Create Event</button>
+                    </div>
+                </div>
+            </form>
+        </div>

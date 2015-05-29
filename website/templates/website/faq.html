@@ -1,0 +1,26 @@
+{% extends 'website/base.html' %}
+
+{% block website_scripts %}
+    {% load staticfiles %}
+        <script src="{% static 'website/js/oishii.js' %}" defer></script>
+{% endblock website_scripts %}
+
+{% block content %}
+        <div class="container">
+            <p><h3>FAQ</h3></p>
+            <div>
+                <p>
+                    Q: How do I create an event?<br>
+                    A: If you are a registered user, you can go to the <a href="{% url 'website_home' %}">home</a> page and click anywhere on the map to open a dialog for creating an event listing at that location.
+                </p>
+                <p>
+                    Q: How is a user's rating calculated<br>
+                    A: A user's rating is calculated by summing together the stars received on all events created by that user. For example, if you have created two events receiving 10 and 20 stars respectively, your rating will be 10 + 20 = 30.
+                </p>
+                <p>
+                    Q: Do I have to register in order to use Oishii?<br>
+                    A: Nope! Registering is entirely optional. You may continue to use the app as a guest until the end of time. But if you want to be a contributing member, you will have to <a href="{% url 'website_register' %}">register</a> an account in order to create events.
+                </p>
+            </div>
+        </div>
+{% endblock content %}

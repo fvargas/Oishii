@@ -1,0 +1,27 @@
+{% extends 'website/base.html' %}
+
+{% block website_scripts %}
+    {% load staticfiles %}
+        <script src="{% static 'website/js/oishii.js' %}" defer></script>
+{% endblock website_scripts %}
+
+{% block content %}
+        <div class="container">
+            <table id="scoreboard-table" class="centered hoverable">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for profile in top_profiles %}
+                    <tr>
+                        <td>{{ profile.user.username }}</td>
+                        <td>{{ profile.rating}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+{% endblock content %}
