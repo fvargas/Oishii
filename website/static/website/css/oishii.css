@@ -1,11 +1,16 @@
-html, body, #map-container, #map-canvas {
+html,
+body,
+#map-container,
+#map-canvas {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
 }
 
-body, .modal, .modal .modal-footer {
+body,
+.modal,
+.modal .modal-footer {
     /* Temporary background */
     background-image: url('https://developer.cdn.mozilla.net/media/img/header-background.png');
 }
@@ -76,7 +81,8 @@ nav {
     cursor: pointer;
 }
 
-#registration, #login-page {
+#registration,
+#login-page {
     margin-top: 11vh;
 }
 
@@ -100,15 +106,18 @@ table.hoverable tbody tr:hover {
     background-color: rgba(0, 172, 193, .12);
 }
 
-.btn, .btn-large {
+.btn,
+.btn-large {
     overflow: hidden;
 }
 
-.btn:hover:before, .btn-large:hover:before {
+.btn:hover:before,
+.btn-large:hover:before {
     opacity: 1;
 }
 
-.btn:before, .btn-large:before {
+.btn:before,
+.btn-large:before {
     content: '';
     opacity: 0;
     position: absolute;
@@ -141,11 +150,13 @@ table.hoverable tbody tr:hover {
     margin-bottom: -15px;
 }
 
-.unstarred, .starred:hover {
+.unstarred,
+.starred:hover {
     color: #e0e0e0 !important;
 }
 
-.starred, .unstarred:hover {
+.starred,
+.unstarred:hover {
     color: #29b6f6 !important;
 }
 
