@@ -20,6 +20,10 @@ nav {
     z-index: 1;
 }
 
+nav .brand-logo {
+  font-family: Nunito, Arial, sans-serif;
+}
+
 .side-nav li:hover {
     background-color: rgba(117, 140, 170, .6) !important;
 }
