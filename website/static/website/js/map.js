@@ -112,8 +112,8 @@ function markerClickAction() {
     infoWindow.setContent(this.content);
     infoWindow.open(map, this);
 
-    var event_id = this.id;
-    $('#event_' + event_id).click(event_id, toggleEventStar);
+    var eventId = this.id;
+    $('#event_' + eventId).click(eventId, toggleEventStar);
 }
 
 /**
@@ -122,9 +122,9 @@ function markerClickAction() {
  * @param {int} id
  */
 function toggleEventStar(event) {
-    var event_id = event.data;
+    var eventId = event.data;
     var data = {
-        event_id: event_id
+        event_id: eventId
     };
 
     $.ajax({
@@ -137,15 +137,15 @@ function toggleEventStar(event) {
 
     function success(response) {
         if (response === 'starred' || response === 'unstarred') {
-            var selector = '#event_' + event_id;
+            var selector = '#event_' + eventId;
             $(selector).toggleClass('starred');
             $(selector).toggleClass('unstarred');
 
-            var current_stars = parseInt($('#event_stars_' + event_id).html());
+            var currentStars = parseInt($('#event_stars_' + eventId).html());
             if (response === 'starred')
-                $('#event_stars_' + event_id).html(current_stars + 1);
+                $('#event_stars_' + eventId).html(currentStars + 1);
             else
-                $('#event_stars_' + event_id).html(current_stars - 1);
+                $('#event_stars_' + eventId).html(currentStars - 1);
         }
     }
 }
