@@ -129,6 +129,10 @@ table.hoverable tbody tr:hover {
     z-index: -1;
 }
 
+.nav-blue {
+  background-color: #00accf !important;
+}
+
 .oishii-blue {
     background-color: #556c8a !important;
 }
