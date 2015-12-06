@@ -9,8 +9,8 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.db import transaction
 from django.core.exceptions import ObjectDoesNotExist
 
-from models import Profile, Event, Comment
-from forms import EventForm, EventStarForm, RegistrationForm
+from models import *
+from forms import *
 
 @ensure_csrf_cookie
 def home(request):

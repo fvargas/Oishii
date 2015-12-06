@@ -44,19 +44,20 @@ function initialize() {
         mapTypeControl: true,
         scaleControl: false,
         streetViewControl: false,
-        overviewMapControl: false
+        overviewMapControl: false,
     };
     // Set zoom control on or off depending on presence of touch events
-    if (Modernizr.touch)
+    if (Modernizr.touch) {
         mapOptions['zoomControl'] = false;
-    else
+    } else {
         mapOptions['zoomControl'] = true;
+    }
 
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
 
     infoWindow = new google.maps.InfoWindow({
-        maxWidth: INFO_WINDOW_MAX_WIDTH
+        maxWidth: INFO_WINDOW_MAX_WIDTH,
     });
 
     renderIcons(map);
@@ -81,7 +82,7 @@ function renderIcons(map) {
         url: '/fetch-events',
         method: 'GET',
         dataType: 'json',
-        success: success
+        success: success,
     });
 
     function success(data) {
@@ -113,6 +114,8 @@ function markerClickAction() {
     infoWindow.open(map, this);
 
     var eventId = this.id;
+    // TODO: If a single element gets several bindings, will multiple
+    // toggle operations be performed, potentially cancelling each other out?
     $('#event_' + eventId).click(eventId, toggleEventStar);
 }
 
@@ -124,7 +127,7 @@ function markerClickAction() {
 function toggleEventStar(event) {
     var eventId = event.data;
     var data = {
-        event_id: eventId
+        event_id: eventId,
     };
 
     $.ajax({
@@ -132,7 +135,7 @@ function toggleEventStar(event) {
         method: 'POST',
         data: data,
         dataType: 'text',
-        success: success
+        success: success,
     });
 
     function success(response) {
