@@ -4,3 +4,10 @@ db.sqlite3
 
 migrations/
 venv/
+
+bower_components/
+node_modules/
+
+website/static/js/vendor.js
+website/static/css/vendor.css
+website/static/fonts/map-icons.*

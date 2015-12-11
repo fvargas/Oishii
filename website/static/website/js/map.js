@@ -5,8 +5,6 @@ var map;
 var infoWindow;
 
 $(function() {
-    loadGoogleMap('initialize');
-
     $('.datepicker').pickadate({
         selectMonths: true,
         selectYears: 5
@@ -16,21 +14,11 @@ $(function() {
 });
 
 /**
- * Asynchronously loads the Google Maps API and executes the function given by
- * the callback argument upon completion.
- *
- * @param {string} callback
+ * Initializes the map. This functions is called once the Google Maps
+ * API is has loaded. The name of this function is given as a parameter
+ * when including the Google Maps API script.
  */
-function loadGoogleMap(callback) {
-    var script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?callback=' + callback;
-    document.head.appendChild(script);
-}
-
-/**
- * Initializes the map.
- */
-function initialize() {
+function initialize_map() {
     var DEFAULT_LATITUDE = 40.442492;
     var DEFAULT_LONGITUDE = -79.942553;
     var INFO_WINDOW_MAX_WIDTH = 250;
@@ -42,6 +30,7 @@ function initialize() {
         styles: getMapStyles(),
         panControl: false,
         mapTypeControl: true,
+        mapTypeControlOptions: { position: google.maps.ControlPosition.TOP_RIGHT },
         scaleControl: false,
         streetViewControl: false,
         overviewMapControl: false,
@@ -95,10 +84,17 @@ function renderIcons(map) {
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(currentEvent['latitude'], currentEvent['longitude']),
                 map: map,
-                icon: DEFAULT_ICON,
                 title: currentEvent['title'],
+                icon: {
+              		path: SQUARE_PIN,
+              		fillColor: '#00acd1',
+              		fillOpacity: 0.85,
+              		strokeColor: '',
+              		strokeWeight: 0,
+              	},
+                map_icon_label: '<span class="map-icon map-icon-point-of-interest"></span>',
                 content: currentEvent['html'],
-                id: currentEvent['id']
+                id: currentEvent['id'],
             });
             google.maps.event.addListener(marker, 'click', markerClickAction);
         }

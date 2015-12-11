@@ -1,0 +1,11 @@
+{
+  "name": "oishii",
+  "homepage": "https://github.com/fvargas/Oishii",
+  "authors": [
+    "Felipe Vargas <fvargasx@gmail.com>"
+  ],
+  "private": true,
+  "dependencies": {
+    "map-icons": "~3.0.0"
+  }
+}
