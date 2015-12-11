@@ -1,0 +1,7 @@
+migrations/
+node_modules/
+bower_components/
+
+static/js/vendor.js
+static/css/vendor.css
+static/fonts/map-icons.*
