@@ -8,6 +8,10 @@ body,
     padding: 0;
 }
 
+.map-icon-label {
+    transform: translateX(-3.5px);
+}
+
 body,
 .modal,
 .modal .modal-footer {

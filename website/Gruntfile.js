@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         mainFiles: {
           'map-icons': [
             'dist/js/map-icons.min.js',
-            'dist/css/map-icons.css',
+            'dist/css/map-icons.min.css',
           ],
         },
       },
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
           destPrefix: 'static',
         },
         files: {
-          'fonts': 'map-icons/dist/fonts/*'
+          'fonts': 'map-icons/dist/fonts/*',
         },
       },
     },

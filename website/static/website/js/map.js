@@ -5,6 +5,8 @@ var map;
 var infoWindow;
 
 $(function() {
+    initialize_map();
+
     $('.datepicker').pickadate({
         selectMonths: true,
         selectYears: 5
@@ -81,18 +83,18 @@ function renderIcons(map) {
         // Create markers for all events
         for (var i = 0; i < eventsLength; i++) {
             var currentEvent = events[i];
-            var marker = new google.maps.Marker({
+            var marker = new Marker({
                 position: new google.maps.LatLng(currentEvent['latitude'], currentEvent['longitude']),
                 map: map,
                 title: currentEvent['title'],
                 icon: {
-              		path: SQUARE_PIN,
-              		fillColor: '#00acd1',
-              		fillOpacity: 0.85,
-              		strokeColor: '',
-              		strokeWeight: 0,
-              	},
-                map_icon_label: '<span class="map-icon map-icon-point-of-interest"></span>',
+                    path: MAP_PIN,
+                    fillColor: '#00acd1',
+                    fillOpacity: 0.88,
+                    strokeColor: '',
+                    strokeWeight: 0,
+                },
+                map_icon_label: '<span class="map-icon map-icon-restaurant"></span>',
                 content: currentEvent['html'],
                 id: currentEvent['id'],
             });
