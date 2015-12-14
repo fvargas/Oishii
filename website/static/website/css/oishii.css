@@ -2,26 +2,22 @@ html,
 body,
 #map-container,
 #map-canvas {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.map-icon-label {
-    transform: translateX(-3.5px);
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body,
 .modal,
 .modal .modal-footer {
-    /* Temporary background */
-    background-image: url('https://developer.cdn.mozilla.net/media/img/header-background.png');
+  /* Temporary background */
+  background-image: url('https://developer.cdn.mozilla.net/media/img/header-background.png');
 }
 
 nav {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 nav .brand-logo {
@@ -29,112 +25,112 @@ nav .brand-logo {
 }
 
 .side-nav li:hover {
-    background-color: rgba(117, 140, 170, .6) !important;
+  background-color: rgba(117, 140, 170, .6) !important;
 }
 
 .side-nav li a {
-    color: #444;
-    display: block;
-    font-size: 1rem;
-    height: 64px;
-    line-height: 64px;
-    padding: 0 15px;
+  color: #444;
+  display: block;
+  font-size: 1rem;
+  height: 64px;
+  line-height: 64px;
+  padding: 0 15px;
 }
 
 #create-event {
-    max-height: 88%;
+  max-height: 88%;
 }
 
 @media only screen and (min-width: 601px) {
-    #map-container {
-        padding-top: 64px;
-        margin-top: -64px;
-    }
+  #map-container {
+    padding-top: 64px;
+    margin-top: -64px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
-    #map-container {
-        padding-top: 56px;
-        margin-top: -56px;
-    }
+  #map-container {
+    padding-top: 56px;
+    margin-top: -56px;
+  }
 }
 
 @media only screen and (min-width: 993px) {
-    .brand-logo {
-        margin-left: 15px;
-    }
+  .brand-logo {
+    margin-left: 15px;
+  }
 }
 
 .modal .modal-content {
-    padding-bottom: 0;
+  padding-bottom: 0;
 }
 
 #event-header {
-    height: 75px;
-    padding-top: 2.5em;
-    padding-left: 1.65em;
-    margin: -24px -40px 0;
+  height: 75px;
+  padding-top: 2.5em;
+  padding-left: 1.65em;
+  margin: -24px -40px 0;
 }
 
 #event-submit {
-    float: none;
-    margin-top: -27.25px;
+  float: none;
+  margin-top: -27.25px;
 }
 
 #login-submit {
-    float: none;
+  float: none;
 }
 
 .pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #registration,
 #login-page {
-    margin-top: 11vh;
+  margin-top: 11vh;
 }
 
 #registration label {
-    color: #00838f;
+  color: #00838f;
 }
 
 #scoreboard-table {
-    margin-top: 2.5vh;
+  margin-top: 2.5vh;
 }
 
 td {
-    color: #00838f;
+  color: #00838f;
 }
 
 th {
-    color: #006064;
+  color: #006064;
 }
 
 table.hoverable tbody tr:hover {
-    background-color: rgba(0, 172, 193, .12);
+  background-color: rgba(0, 172, 193, .12);
 }
 
 .btn,
 .btn-large {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .btn:hover:before,
 .btn-large:hover:before {
-    opacity: 1;
+  opacity: 1;
 }
 
 .btn:before,
 .btn-large:before {
-    content: '';
-    opacity: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    transition: opacity .2s;
-    z-index: -1;
+  content: '';
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  transition: opacity .2s;
+  z-index: -1;
 }
 
 .nav-blue {
@@ -142,58 +138,58 @@ table.hoverable tbody tr:hover {
 }
 
 .oishii-blue {
-    background-color: #556c8a !important;
+  background-color: #556c8a !important;
 }
 
 .oishii-blue.btn-large:before {
-    background-color: rgba(117, 140, 170, .6);
+  background-color: rgba(117, 140, 170, .6);
 }
 
 .oishii-indigo {
-    background-color: #7986cb !important;
+  background-color: #7986cb !important;
 }
 
 .oishii-indigo.btn-large:before {
-    background-color: rgba(144, 166, 235, .6);
+  background-color: rgba(144, 166, 235, .6);
 }
 
 .event-header {
-    margin-top: -15px;
-    margin-bottom: -15px;
+  margin-top: -15px;
+  margin-bottom: -15px;
 }
 
 .unstarred,
 .starred:hover {
-    color: #e0e0e0 !important;
+  color: #e0e0e0 !important;
 }
 
 .starred,
 .unstarred:hover {
-    color: #29b6f6 !important;
+  color: #29b6f6 !important;
 }
 
 .event .row {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .event-footer h6 {
-    display: inline;
+  display: inline;
 }
 
 /**
  * Customization for placeholder attribute
  */
 ::-webkit-input-placeholder { /* WebKit browsers */
-    color: #888888;
+  color: #888888;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: #888888;
-   opacity: 1;
+  color: #888888;
+  opacity: 1;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: #888888;
-   opacity: 1;
+  color: #888888;
+  opacity: 1;
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
-   color: #888888;
+  color: #888888;
 }

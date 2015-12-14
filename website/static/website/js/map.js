@@ -1,11 +1,8 @@
-// replace this with a proper solution
-var DEFAULT_ICON = 'http://resources.goodfood.com.au/common/media-common-1.0/css/base-skin-gf/img/gf-map-marker.png';
-
-var map;
-var infoWindow;
-
 $(function() {
-    initialize_map();
+    var map;
+    var infoWindow;
+
+    initializeMap();
 
     $('.datepicker').pickadate({
         selectMonths: true,
@@ -16,11 +13,10 @@ $(function() {
 });
 
 /**
- * Initializes the map. This functions is called once the Google Maps
- * API is has loaded. The name of this function is given as a parameter
- * when including the Google Maps API script.
+ * Initializes the map. This function should be called once the Google Maps API
+ * has loaded.
  */
-function initialize_map() {
+function initializeMap() {
     var DEFAULT_LATITUDE = 40.442492;
     var DEFAULT_LONGITUDE = -79.942553;
     var INFO_WINDOW_MAX_WIDTH = 250;

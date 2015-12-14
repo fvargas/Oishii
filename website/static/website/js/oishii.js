@@ -1,6 +1,9 @@
 $(function() {
     // Initialize collapse button
-    $('.button-collapse').sideNav();
+    $('.button-collapse').sideNav({
+      edge: 'right',
+      menuWidth: 275,
+    });
 
     bindNavButtons();
     bindLoginForm();
@@ -114,7 +117,7 @@ function bindNavButtons() {
         $('#login').openModal();
         $('#login_username').focus();
     });
-    
+
     $('.logout-button').click(logout);
 }
 
