@@ -10,8 +10,8 @@ module.exports = function(grunt) {
         cssDest: 'static/css/vendor.css',
         mainFiles: {
           'map-icons': [
-            'dist/js/map-icons.min.js',
-            'dist/css/map-icons.min.css',
+            'dist/js/map-icons.js',
+            'dist/css/map-icons.css',
           ],
         },
       },
@@ -28,6 +28,7 @@ module.exports = function(grunt) {
         },
         files: {
           'fonts': 'map-icons/dist/fonts/*',
+          'font': 'Materialize/font/*',
         },
       },
     },

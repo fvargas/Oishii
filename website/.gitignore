@@ -5,3 +5,5 @@ bower_components/
 static/js/vendor.js
 static/css/vendor.css
 static/fonts/map-icons.*
+static/font/material-design-icons/
+static/font/roboto/
