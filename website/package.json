@@ -7,13 +7,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fvargas/Oishii.git"
+    "url": "fvargas/Oishii"
   },
   "author": "Felipe Vargas <fvargasx@gmail.com>",
+  "dependencies": {
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
+  },
   "devDependencies": {
+    "babel-core": "^6.3.17",
+    "babel-loader": "github:fvargas/babel-loader#create-cache-dir",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
     "grunt": "^0.4.5",
     "grunt-bower-concat": "^0.6.0",
     "grunt-bowercopy": "^1.2.3",
-    "jit-grunt": "^0.9.1"
+    "jit-grunt": "^0.9.1",
+    "webpack": "^1.12.9"
   }
 }
