@@ -1,7 +1,10 @@
 import React from 'react';
+import 'header.less';
 
 export default class Home extends React.Component {
   render() {
-    return <h1>Oishii</h1>;
+    return (
+      <header>Oishii</header>
+    );
   }
 };
