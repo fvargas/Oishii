@@ -15,7 +15,7 @@ from forms import *
 @ensure_csrf_cookie
 def home(request):
     context = { 'user': request.user, 'event_form': EventForm() }
-    return render(request, 'home.html', context)
+    return render(request, 'app.html', context)
 
 @ensure_csrf_cookie
 def login_page(request):

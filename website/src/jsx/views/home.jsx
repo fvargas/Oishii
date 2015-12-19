@@ -1,10 +1,8 @@
 import React from 'react';
-import 'header.less';
+import Map from 'map.jsx';
 
 export default class Home extends React.Component {
   render() {
-    return (
-      <header>Oishii</header>
-    );
+    return <Map />;
   }
 };
