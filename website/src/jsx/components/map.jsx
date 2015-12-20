@@ -1,16 +1,20 @@
 import React from 'react';
 import $ from 'jquery';
 import 'map.less';
+import 'map-icons/dist/css/map-icons.css';
 
 export default class Map extends React.Component {
   componentDidMount() {
+    // Export this function to `window' so Google Maps can invoke it as a
+    // callback
     window.initializeMap = this.initializeMap;
     this.loadGoogleMaps('initializeMap');
   }
 
   /**
    * Asynchronously loads the Google Maps API and executes the function given by
-   * the callback argument upon completion.
+   * the callback argument upon completion. The function given by `callback'
+   * must exist in the global scope.
    *
    * @param {String} callback
    */
@@ -65,11 +69,7 @@ export default class Map extends React.Component {
   }
 
   render() {
-    return (
-      <section id='map-container'>
-        <section id='map-canvas'></section>
-      </section>
-    );
+    return <div id='map-canvas'></div>;
   }
 }
 
@@ -105,24 +105,26 @@ function renderIcons(map, infoWindow) {
   });
 
   function success(data) {
+    const MapIcons = require('exports?Marker,MAP_PIN!' +
+      'map-icons/dist/js/map-icons.js');
     const events = data.events;
 
     // Create markers for all events
     events.forEach(currentEvent => {
-      const marker = new google.maps.Marker({
+      const marker = new MapIcons.Marker({
         position: new google.maps.LatLng(
           currentEvent.latitude,
           currentEvent.longitude
         ),
         map: map,
         title: currentEvent.title,
-        /*icon: {
-          path: MAP_PIN,
+        icon: {
+          path: MapIcons.MAP_PIN,
           fillColor: '#00acd1',
-          fillOpacity: 0.88,
+          fillOpacity: 0.92,
           strokeColor: '',
           strokeWeight: 0,
-        },*/
+        },
         map_icon_label: '<span class="map-icon map-icon-restaurant"></span>',
         content: currentEvent.html,
         id: currentEvent.id,
