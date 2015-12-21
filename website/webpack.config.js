@@ -1,5 +1,6 @@
 const path = require('path');
 
+const STATIC_DIR = path.resolve('static');
 const JSX_DIR = path.resolve('src/jsx');
 const JSX_VIEWS_DIR = path.join(JSX_DIR, 'views');
 const JSX_COMPONENTS_DIR = path.join(JSX_DIR, 'components');
@@ -7,10 +8,13 @@ const LESS_DIR = path.resolve('src/less');
 const LESS_VIEWS_DIR = path.join(LESS_DIR, 'views');
 const LESS_COMPONENTS_DIR = path.join(LESS_DIR, 'components');
 
+const MAP_ICONS_DIR = path.resolve('node_modules/map-icons');
+
 module.exports = {
-  entry: JSX_DIR + '/app.jsx',
+  entry: path.join(JSX_DIR, 'app.jsx'),
   output: {
-    path: './static',
+    path: STATIC_DIR,
+    publicPath: '/static/',
     filename: 'bundle.js',
   },
   module: {
@@ -27,9 +31,12 @@ module.exports = {
       { test: /\.css$/, loader: 'style!css' },
       { test: /\.less$/, loader: 'style!css!less' },
 
-      // 48200 was chosen so for map-icons package, only map-icons.ttf would be
-      // inlined
-      { test: /\.(eot|ttf|woff|svg)$/, loader: 'url?limit=48200' },
+      {
+        test: /\.(eot|ttf|woff|svg)$/,
+        include: MAP_ICONS_DIR,
+        // 48200 was chosen so only map-icons.ttf would be inlined
+        loader: 'url?limit=48200',
+      },
     ],
   },
   resolve: {

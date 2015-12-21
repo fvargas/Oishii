@@ -1,11 +1,5 @@
 migrations/
 node_modules/
-bower_components/
 babel_cache/
 
-static/js/vendor.js
-static/css/vendor.css
-static/fonts/map-icons.*
-static/font/material-design-icons/
-static/font/roboto/
 static/bundle.js
