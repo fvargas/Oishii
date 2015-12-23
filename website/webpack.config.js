@@ -9,6 +9,7 @@ const LESS_VIEWS_DIR = path.join(LESS_DIR, 'views');
 const LESS_COMPONENTS_DIR = path.join(LESS_DIR, 'components');
 
 const MAP_ICONS_DIR = path.resolve('node_modules/map-icons');
+const UIKIT_DIR = path.resolve('node_modules/uikit');
 
 module.exports = {
   entry: path.join(JSX_DIR, 'app.jsx'),
@@ -28,14 +29,18 @@ module.exports = {
           cacheDirectory: 'babel_cache',
         },
       },
-      { test: /\.css$/, loader: 'style!css' },
-      { test: /\.less$/, loader: 'style!css!less' },
-
+      { test: /\.css$/, loader: 'style!css!autoprefixer' },
+      { test: /\.less$/, loader: 'style!css!autoprefixer!less' },
       {
         test: /\.(eot|ttf|woff|svg)$/,
         include: MAP_ICONS_DIR,
         // 48200 was chosen so only map-icons.ttf would be inlined
         loader: 'url?limit=48200',
+      },
+      {
+        test: /\.(otf|ttf|woff2?)$/,
+        include: UIKIT_DIR,
+        loader: 'url?limit=1',
       },
     ],
   },
