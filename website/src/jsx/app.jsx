@@ -1,4 +1,5 @@
-import React from 'react';
+import 'uikit';
+import 'uikit.css';
 import ReactDOM from 'react-dom';
 import Home from 'home.jsx';
 

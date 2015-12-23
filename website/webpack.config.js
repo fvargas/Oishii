@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 
 const STATIC_DIR = path.resolve('static');
@@ -8,8 +9,10 @@ const LESS_DIR = path.resolve('src/less');
 const LESS_VIEWS_DIR = path.join(LESS_DIR, 'views');
 const LESS_COMPONENTS_DIR = path.join(LESS_DIR, 'components');
 
-const MAP_ICONS_DIR = path.resolve('node_modules/map-icons');
 const UIKIT_DIR = path.resolve('node_modules/uikit');
+const UIKIT_CSS_DIR = path.join(UIKIT_DIR, 'dist/css');
+const MAP_ICONS_DIR = path.resolve('node_modules/map-icons');
+const MAP_ICONS_CSS_DIR = path.join(MAP_ICONS_DIR, 'dist/css');
 
 module.exports = {
   entry: path.join(JSX_DIR, 'app.jsx'),
@@ -29,8 +32,14 @@ module.exports = {
           cacheDirectory: 'babel_cache',
         },
       },
-      { test: /\.css$/, loader: 'style!css!autoprefixer' },
-      { test: /\.less$/, loader: 'style!css!autoprefixer!less' },
+      {
+        test: /\.css$/,
+        loader: 'style!css!autoprefixer',
+      },
+      {
+        test: /\.less$/,
+        loader: 'style!css!autoprefixer!less',
+      },
       {
         test: /\.(eot|ttf|woff|svg)$/,
         include: MAP_ICONS_DIR,
@@ -45,6 +54,21 @@ module.exports = {
     ],
   },
   resolve: {
-    root: [JSX_VIEWS_DIR, JSX_COMPONENTS_DIR, LESS_VIEWS_DIR, LESS_COMPONENTS_DIR],
+    root: [
+      JSX_VIEWS_DIR,
+      JSX_COMPONENTS_DIR,
+      LESS_VIEWS_DIR,
+      LESS_COMPONENTS_DIR,
+      UIKIT_CSS_DIR,
+      MAP_ICONS_CSS_DIR,
+    ],
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      React: 'react',
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+    }),
+  ],
 };

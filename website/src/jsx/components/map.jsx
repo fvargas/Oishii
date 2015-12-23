@@ -1,7 +1,5 @@
-import React from 'react';
-import $ from 'jquery';
+import 'map-icons.css';
 import 'map.less';
-import 'map-icons/dist/css/map-icons.css';
 
 export default class Map extends React.Component {
   componentDidMount() {
@@ -34,8 +32,7 @@ export default class Map extends React.Component {
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: getMapStyles(),
       panControl: false,
-      mapTypeControl: true,
-      mapTypeControlOptions: { position: google.maps.ControlPosition.TOP_RIGHT },
+      mapTypeControl: false,
       scaleControl: false,
       streetViewControl: false,
       overviewMapControl: false,
