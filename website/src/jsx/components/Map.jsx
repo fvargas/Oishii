@@ -1,5 +1,5 @@
 import 'map-icons.css';
-import 'map.less';
+import 'Map.less';
 
 export default class Map extends React.Component {
   componentDidMount() {
@@ -10,7 +10,7 @@ export default class Map extends React.Component {
   }
 
   /**
-   * Asynchronously loads the Google Maps API and executes the function given by
+   * Asynchronously load the Google Maps API and execute the function given by
    * the callback argument upon completion. The function given by `callback'
    * must exist in the global scope.
    *
@@ -55,14 +55,14 @@ export default class Map extends React.Component {
 
     renderIcons(map, infoWindow);
 
-    /*google.maps.event.addListener(map, 'click', event => {
-      $('#create-event').openModal();
+    map.addListener('click', event => {
+      /*$('#create-event').openModal();
       $('#id_title').focus();
 
       const latLng = event.latLng;
       $('#id_latitude').val(latLng.lat());
-      $('#id_longitude').val(latLng.lng());
-    });*/
+      $('#id_longitude').val(latLng.lng());*/
+    });
   }
 
   render() {

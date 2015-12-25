@@ -1,4 +1,4 @@
-import 'header.less';
+import 'Header.less';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -14,6 +14,7 @@ export default class Header extends React.Component {
             <li className='uk-active'><a href='/'>Home</a></li>
             <li><a href='#'>Scoreboard</a></li>
             <li><a href='#'>FAQ</a></li>
+            <li><a href='#create-event' data-uk-modal>Create Event</a></li>
           </ul>
           <div className='uk-navbar-flip'>
             <ul className='uk-navbar-nav uk-hidden-small'>

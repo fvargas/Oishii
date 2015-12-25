@@ -1,7 +1,7 @@
 import 'uikit';
-import 'uikit.css';
+import 'uikit.almost-flat.css';
 import ReactDOM from 'react-dom';
-import Home from 'home.jsx';
+import Home from 'Home.jsx';
 
 ReactDOM.render(
   <Home />,

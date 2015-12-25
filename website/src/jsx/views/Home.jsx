@@ -1,7 +1,8 @@
-import Header from 'header.jsx';
-import SideNav from 'sidenav.jsx';
-import Map from 'map.jsx';
-import 'home.less';
+import Header from 'Header.jsx';
+import SideNav from 'SideNav.jsx';
+import Map from 'Map.jsx';
+import CreateEventModal from 'CreateEventModal.jsx';
+import 'Home.less';
 
 export default class Home extends React.Component {
   render() {
@@ -12,6 +13,7 @@ export default class Home extends React.Component {
         <Header sideNavID={ SIDE_NAV_ID } />
         <SideNav sideNavID={ SIDE_NAV_ID } />
         <Map />
+        <CreateEventModal />
       </div>
     );
   }

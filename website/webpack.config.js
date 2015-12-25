@@ -10,12 +10,14 @@ const LESS_VIEWS_DIR = path.join(LESS_DIR, 'views');
 const LESS_COMPONENTS_DIR = path.join(LESS_DIR, 'components');
 
 const UIKIT_DIR = path.resolve('node_modules/uikit');
+const UIKIT_COMPONENTS_JS_DIR = path.join(UIKIT_DIR, 'dist/js/components');
+const UIKIT_COMPONENTS_CSS_DIR = path.join(UIKIT_DIR, 'dist/css/components');
 const UIKIT_CSS_DIR = path.join(UIKIT_DIR, 'dist/css');
 const MAP_ICONS_DIR = path.resolve('node_modules/map-icons');
 const MAP_ICONS_CSS_DIR = path.join(MAP_ICONS_DIR, 'dist/css');
 
 module.exports = {
-  entry: path.join(JSX_DIR, 'app.jsx'),
+  entry: path.join(JSX_DIR, 'App.jsx'),
   output: {
     path: STATIC_DIR,
     publicPath: '/static/',
@@ -59,6 +61,8 @@ module.exports = {
       JSX_COMPONENTS_DIR,
       LESS_VIEWS_DIR,
       LESS_COMPONENTS_DIR,
+      UIKIT_COMPONENTS_JS_DIR,
+      UIKIT_COMPONENTS_CSS_DIR,
       UIKIT_CSS_DIR,
       MAP_ICONS_CSS_DIR,
     ],
@@ -67,6 +71,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       React: 'react',
       $: 'jquery',
+      // uikit expects these two jquery variables to be available globally
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
     }),
