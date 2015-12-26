@@ -2,10 +2,14 @@ import 'map-icons.css';
 import 'Map.less';
 
 export default class Map extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     // Export this function to `window' so Google Maps can invoke it as a
     // callback
-    window.initializeMap = this.initializeMap;
+    window.initializeMap = this.initializeMap.bind(this);
     this.loadGoogleMaps('initializeMap');
   }
 
@@ -30,7 +34,7 @@ export default class Map extends React.Component {
       center: new google.maps.LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE),
       zoom: 17,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      styles: getMapStyles(),
+      styles: this.getMapStyles(),
       panControl: false,
       mapTypeControl: false,
       scaleControl: false,
@@ -53,16 +57,164 @@ export default class Map extends React.Component {
       maxWidth: 250,
     });
 
-    renderIcons(map, infoWindow);
+    this.renderIcons(map, infoWindow);
 
-    map.addListener('click', event => {
-      /*$('#create-event').openModal();
-      $('#id_title').focus();
+    // Show event creation UI and record the latitude and longitude where the
+    // user clicked on the map
+    map.addListener('click', e => {
+      const latLng = e.latLng;
+      this.props.onLatLngSelect(latLng.lat(), latLng.lng());
 
-      const latLng = event.latLng;
-      $('#id_latitude').val(latLng.lat());
-      $('#id_longitude').val(latLng.lng());*/
+      this.props.showCreateEventModal();
     });
+  }
+
+  /**
+   * Get the styles to be used in the map.
+   *
+   * Credit: Famous Labs
+   *         https://snazzymaps.com/style/61/blue-essence
+   *
+   * @return {Array<google.maps.MapTypeStyle>}
+   */
+  getMapStyles() {
+    const styles = [
+      {
+          "featureType": "landscape.natural",
+          "elementType": "geometry.fill",
+          "stylers": [
+              {
+                  "visibility": "on"
+              },
+              {
+                  "color": "#e0efef"
+              }
+          ]
+      },
+      {
+          "featureType": "poi",
+          "elementType": "geometry.fill",
+          "stylers": [
+              {
+                  "visibility": "on"
+              },
+              {
+                  "hue": "#1900ff"
+              },
+              {
+                  "color": "#c0e8e8"
+              }
+          ]
+      },
+      {
+          "featureType": "road",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "lightness": 100
+              },
+              {
+                  "visibility": "simplified"
+              }
+          ]
+      },
+      {
+          "featureType": "road",
+          "elementType": "labels",
+          "stylers": [
+              {
+                  "visibility": "off"
+              }
+          ]
+      },
+      {
+          "featureType": "transit.line",
+          "elementType": "geometry",
+          "stylers": [
+              {
+                  "visibility": "on"
+              },
+              {
+                  "lightness": 700
+              }
+          ]
+      },
+      {
+          "featureType": "water",
+          "elementType": "all",
+          "stylers": [
+              {
+                  "color": "#7dcdcd"
+              }
+          ]
+      }
+    ];
+
+    return styles;
+  }
+
+  /**
+   * Creates and renders the icons to be displayed on the map.
+   *
+   * @param {google.maps.Map} map
+   * @param {google.maps.InfoWindow} infoWindow
+   */
+  renderIcons(map, infoWindow) {
+    $.ajax({
+      url: '/fetch-events',
+      method: 'GET',
+      dataType: 'json',
+      success: success.bind(this),
+    });
+
+    function success(data) {
+      const MapIcons = require('exports?Marker,MAP_PIN!' +
+        'map-icons/dist/js/map-icons.js');
+      const events = data.events;
+
+      // Create markers for all events
+      events.forEach(currentEvent => {
+        const marker = new MapIcons.Marker({
+          position: new google.maps.LatLng(
+            currentEvent.latitude,
+            currentEvent.longitude
+          ),
+          map: map,
+          title: currentEvent.title,
+          icon: {
+            path: MapIcons.MAP_PIN,
+            fillColor: '#00acd1',
+            fillOpacity: 0.92,
+            strokeColor: '',
+            strokeWeight: 0,
+          },
+          map_icon_label: '<span class="map-icon map-icon-restaurant"></span>',
+          content: currentEvent.html,
+          id: currentEvent.id,
+        });
+        google.maps.event.addListener(marker, 'click', () => {
+          this.markerClickAction(marker, map, infoWindow);
+        });
+      });
+    }
+  }
+
+  /**
+   * Updates the info window for the clicked marker. Binds event handler for
+   * starring the event.
+   *
+   * @param {MapIcons.Marker} marker
+   * @param {google.maps.Map} map
+   * @param {google.maps.InfoWindow} infoWindow
+   */
+  markerClickAction(marker, map, infoWindow) {
+    infoWindow.setContent(marker.content);
+    infoWindow.open(map, marker);
+
+    /*const eventId = this.id;
+    // TODO: If a single element gets several bindings, will multiple
+    // toggle operations be performed, potentially cancelling each other out?
+    $(`#event_${eventId}`).click(eventId, toggleEventStar);*/
   }
 
   render() {
@@ -83,72 +235,6 @@ export default class Map extends React.Component {
 
     $('#event-form').submit(createEvent);
 });*/
-
-/**
- * Creates and renders the icons to be displayed on the map.
- *
- * This function is defined outside the Map class so the initializeMap()
- * method can access it without it being in the global namespace.
- *
- * @param {google.maps.Map} map
- * @param {google.maps.InfoWindow} infoWindow
- */
-function renderIcons(map, infoWindow) {
-  $.ajax({
-    url: '/fetch-events',
-    method: 'GET',
-    dataType: 'json',
-    success: success,
-  });
-
-  function success(data) {
-    const MapIcons = require('exports?Marker,MAP_PIN!' +
-      'map-icons/dist/js/map-icons.js');
-    const events = data.events;
-
-    // Create markers for all events
-    events.forEach(currentEvent => {
-      const marker = new MapIcons.Marker({
-        position: new google.maps.LatLng(
-          currentEvent.latitude,
-          currentEvent.longitude
-        ),
-        map: map,
-        title: currentEvent.title,
-        icon: {
-          path: MapIcons.MAP_PIN,
-          fillColor: '#00acd1',
-          fillOpacity: 0.92,
-          strokeColor: '',
-          strokeWeight: 0,
-        },
-        map_icon_label: '<span class="map-icon map-icon-restaurant"></span>',
-        content: currentEvent.html,
-        id: currentEvent.id,
-      });
-      google.maps.event.addListener(marker, 'click', () => {
-        markerClickAction.bind(marker)(map, infoWindow);
-      });
-    });
-  }
-}
-
-/**
- * Updates the info window for the clicked marker. Binds event handler for
- * starring the event.
- *
- * @param {google.maps.Map} map
- * @param {google.maps.InfoWindow} infoWindow
- */
-function markerClickAction(map, infoWindow) {
-    infoWindow.setContent(this.content);
-    infoWindow.open(map, this);
-
-    const eventId = this.id;
-    // TODO: If a single element gets several bindings, will multiple
-    // toggle operations be performed, potentially cancelling each other out?
-    $(`#event_${eventId}`).click(eventId, toggleEventStar);
-}
 
 /**
  * Sends an AJAX request to toggle the star state of the given event.
@@ -231,91 +317,4 @@ function createEvent() {
 
     // Necessary to stop event propagation
     return false;
-}
-
-/**
- * Get the styles to be used in the map.
- *
- * This function is defined outside the Map class so the initializeMap()
- * method can access it without it being in the global namespace.
- *
- * Credit: Famous Labs
- *         https://snazzymaps.com/style/61/blue-essence
- *
- * @return {Array<google.maps.MapTypeStyle>}
- */
-function getMapStyles() {
-  const styles = [
-    {
-        "featureType": "landscape.natural",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#e0efef"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "hue": "#1900ff"
-            },
-            {
-                "color": "#c0e8e8"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "lightness": 100
-            },
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "transit.line",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "lightness": 700
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#7dcdcd"
-            }
-        ]
-    }
-  ];
-
-  return styles;
 }

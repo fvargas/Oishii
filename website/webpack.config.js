@@ -10,9 +10,9 @@ const LESS_VIEWS_DIR = path.join(LESS_DIR, 'views');
 const LESS_COMPONENTS_DIR = path.join(LESS_DIR, 'components');
 
 const UIKIT_DIR = path.resolve('node_modules/uikit');
+const UIKIT_CSS_DIR = path.join(UIKIT_DIR, 'dist/css');
 const UIKIT_COMPONENTS_JS_DIR = path.join(UIKIT_DIR, 'dist/js/components');
 const UIKIT_COMPONENTS_CSS_DIR = path.join(UIKIT_DIR, 'dist/css/components');
-const UIKIT_CSS_DIR = path.join(UIKIT_DIR, 'dist/css');
 const MAP_ICONS_DIR = path.resolve('node_modules/map-icons');
 const MAP_ICONS_CSS_DIR = path.join(MAP_ICONS_DIR, 'dist/css');
 

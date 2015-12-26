@@ -1,10 +1,6 @@
 import 'Header.less';
 
 export default class Header extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <header className='header-main'>
@@ -14,7 +10,6 @@ export default class Header extends React.Component {
             <li className='uk-active'><a href='/'>Home</a></li>
             <li><a href='#'>Scoreboard</a></li>
             <li><a href='#'>FAQ</a></li>
-            <li><a href='#create-event' data-uk-modal>Create Event</a></li>
           </ul>
           <div className='uk-navbar-flip'>
             <ul className='uk-navbar-nav uk-hidden-small'>
@@ -22,9 +17,8 @@ export default class Header extends React.Component {
               <li><a href='#'>Register</a></li>
             </ul>
             <a
-              href={ `#${this.props.sideNavID}` }
               className='uk-navbar-toggle uk-visible-small'
-              data-uk-offcanvas
+              onClick={ this.props.showSideNav }
             ></a>
           </div>
         </nav>
