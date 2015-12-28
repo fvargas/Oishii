@@ -2,16 +2,22 @@ import Header from 'Header.jsx';
 import SideNav from 'SideNav.jsx';
 import Map from 'Map.jsx';
 import CreateEventModal from 'CreateEventModal.jsx';
+import EventCollection from 'EventCollection.js';
 import 'Home.less';
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      events: new EventCollection,
       latitude: 0,
       longitude: 0,
     };
     this.handleLatLngSelect = this.handleLatLngSelect.bind(this);
+  }
+
+  componentWillMount() {
+    this.state.events.fetch();
   }
 
   handleLatLngSelect(lat, lng) {
@@ -24,6 +30,7 @@ export default class Home extends React.Component {
         <Header showSideNav={ () => this.refs.sideNav.showSideNav() } />
         <SideNav ref='sideNav' />
         <Map
+          events={ this.state.events }
           showCreateEventModal={ () => this.refs.createEventModal.showModal() }
           onLatLngSelect={ this.handleLatLngSelect }
         />

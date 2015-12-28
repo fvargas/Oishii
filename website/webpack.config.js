@@ -8,6 +8,8 @@ const JSX_COMPONENTS_DIR = path.join(JSX_DIR, 'components');
 const LESS_DIR = path.resolve('src/less');
 const LESS_VIEWS_DIR = path.join(LESS_DIR, 'views');
 const LESS_COMPONENTS_DIR = path.join(LESS_DIR, 'components');
+const MODELS_DIR = path.resolve('src/models');
+const COLLECTIONS_DIR = path.resolve('src/collections');
 
 const UIKIT_DIR = path.resolve('node_modules/uikit');
 const UIKIT_CSS_DIR = path.join(UIKIT_DIR, 'dist/css');
@@ -26,8 +28,8 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx$/,
-        include: JSX_DIR,
+        test: /\.jsx?$/,
+        include: [JSX_DIR, MODELS_DIR, COLLECTIONS_DIR],
         loader: 'babel',
         query: {
           presets: ['es2015', 'react'],
@@ -61,6 +63,8 @@ module.exports = {
       JSX_COMPONENTS_DIR,
       LESS_VIEWS_DIR,
       LESS_COMPONENTS_DIR,
+      MODELS_DIR,
+      COLLECTIONS_DIR,
       UIKIT_COMPONENTS_JS_DIR,
       UIKIT_COMPONENTS_CSS_DIR,
       UIKIT_CSS_DIR,
@@ -70,6 +74,7 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       React: 'react',
+      Backbone: 'backbone',
       $: 'jquery',
       // uikit expects these two jquery variables to be available globally
       jQuery: 'jquery',

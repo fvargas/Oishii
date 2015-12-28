@@ -93,7 +93,7 @@ def get_events(request):
             'html': render_to_string('website/event.html', { 'event': event, 'is_starred': is_starred })
         })
 
-    return JsonResponse({ 'events': events_data })
+    return JsonResponse(events_data, safe=False)
 
 @transaction.atomic
 def create_event(request):

@@ -160,43 +160,33 @@ export default class Map extends React.Component {
    * @param {google.maps.InfoWindow} infoWindow
    */
   renderIcons(map, infoWindow) {
-    $.ajax({
-      url: '/fetch-events',
-      method: 'GET',
-      dataType: 'json',
-      success: success.bind(this),
-    });
+    const MapIcons = require('exports?Marker,MAP_PIN!' +
+      'map-icons/dist/js/map-icons.js');
 
-    function success(data) {
-      const MapIcons = require('exports?Marker,MAP_PIN!' +
-        'map-icons/dist/js/map-icons.js');
-      const events = data.events;
-
-      // Create markers for all events
-      events.forEach(currentEvent => {
-        const marker = new MapIcons.Marker({
-          position: new google.maps.LatLng(
-            currentEvent.latitude,
-            currentEvent.longitude
-          ),
-          map: map,
-          title: currentEvent.title,
-          icon: {
-            path: MapIcons.MAP_PIN,
-            fillColor: '#00acd1',
-            fillOpacity: 0.92,
-            strokeColor: '',
-            strokeWeight: 0,
-          },
-          map_icon_label: '<span class="map-icon map-icon-restaurant"></span>',
-          content: currentEvent.html,
-          id: currentEvent.id,
-        });
-        google.maps.event.addListener(marker, 'click', () => {
-          this.markerClickAction(marker, map, infoWindow);
-        });
+    // Create markers for all events
+    this.props.events.each(currentEvent => {
+      const marker = new MapIcons.Marker({
+        position: new google.maps.LatLng(
+          currentEvent.get('latitude'),
+          currentEvent.get('longitude')
+        ),
+        map: map,
+        title: currentEvent.get('title'),
+        icon: {
+          path: MapIcons.MAP_PIN,
+          fillColor: '#00acd1',
+          fillOpacity: 0.92,
+          strokeColor: '',
+          strokeWeight: 0,
+        },
+        map_icon_label: '<span class="map-icon map-icon-restaurant"></span>',
+        content: currentEvent.get('html'),
+        id: currentEvent.get('id'),
       });
-    }
+      google.maps.event.addListener(marker, 'click', () => {
+        this.markerClickAction(marker, map, infoWindow);
+      });
+    });
   }
 
   /**
