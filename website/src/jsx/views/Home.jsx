@@ -9,7 +9,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: new EventCollection,
+      events: new EventCollection(),
       latitude: 0,
       longitude: 0,
     };
@@ -30,11 +30,12 @@ export default class Home extends React.Component {
         <Header showSideNav={ () => this.refs.sideNav.showSideNav() } />
         <SideNav ref='sideNav' />
         <Map
-          events={ this.state.events }
+          eventCollection={ this.state.events }
           showCreateEventModal={ () => this.refs.createEventModal.showModal() }
           onLatLngSelect={ this.handleLatLngSelect }
         />
         <CreateEventModal
+          eventCollection={ this.state.events }
           latitude={ this.state.latitude }
           longitude={ this.state.longitude }
           ref='createEventModal'

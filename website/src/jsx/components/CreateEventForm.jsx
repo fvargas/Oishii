@@ -18,6 +18,7 @@ export default class CreateEventForm extends React.Component {
       description: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.createEvent = this.createEvent.bind(this);
   }
 
   handleChange() {
@@ -33,9 +34,26 @@ export default class CreateEventForm extends React.Component {
     });
   }
 
+  createEvent(e) {
+    e.preventDefault();
+
+    this.props.eventCollection.create({
+      title: this.refs.title.value,
+      host: this.refs.host.value,
+      food: this.refs.food.value,
+      location: this.refs.location.value,
+      date: this.refs.date.value,
+      time: this.refs.time.value,
+      duration: this.refs.duration.value,
+      description: this.refs.description.value,
+      latitude: this.props.latitude,
+      longitude: this.props.longitude,
+    });
+  }
+
   render() {
     return (
-      <form className='uk-form uk-form-horizontal'>
+      <form className='uk-form uk-form-horizontal' onSubmit={ this.createEvent }>
         <fieldset>
           <legend>Create new event</legend>
           <div className='uk-form-row'>
@@ -153,8 +171,6 @@ export default class CreateEventForm extends React.Component {
             >Create event</button>
           </div>
         </fieldset>
-        <input id='create-event-latitude' type='hidden' value={ this.props.latitude } />
-        <input id='create-event-longitude' type='hidden' value={ this.props.longitude } />
       </form>
     );
   }

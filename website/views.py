@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.http import require_http_methods
 from django.db import transaction
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -70,7 +71,8 @@ def logout_user(request):
 
     return JsonResponse(response)
 
-def get_events(request):
+@require_http_methods(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'])
+def events(request):
     events = Event.objects.all()
 
     events_data = []

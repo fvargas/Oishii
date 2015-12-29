@@ -29,7 +29,11 @@ export default class CreateEventModal extends React.Component {
       <div id='create-event-modal' className='uk-modal' ref={ this.autoFocus }>
         <div className='uk-modal-dialog'>
           <a className='uk-modal-close uk-close'></a>
-          <CreateEventForm latitude={ this.props.latitude } longitude={ this.props.longitude } />
+          <CreateEventForm
+            eventCollection={ this.props.eventCollection }
+            latitude={ this.props.latitude }
+            longitude={ this.props.longitude }
+          />
         </div>
       </div>
     );

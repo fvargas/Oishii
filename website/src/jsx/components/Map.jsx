@@ -164,7 +164,7 @@ export default class Map extends React.Component {
       'map-icons/dist/js/map-icons.js');
 
     // Create markers for all events
-    this.props.events.each(currentEvent => {
+    this.props.eventCollection.each(currentEvent => {
       const marker = new MapIcons.Marker({
         position: new google.maps.LatLng(
           currentEvent.get('latitude'),

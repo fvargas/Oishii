@@ -10,6 +10,7 @@ const LESS_VIEWS_DIR = path.join(LESS_DIR, 'views');
 const LESS_COMPONENTS_DIR = path.join(LESS_DIR, 'components');
 const MODELS_DIR = path.resolve('src/models');
 const COLLECTIONS_DIR = path.resolve('src/collections');
+const UTILS_DIR = path.resolve('src/utils');
 
 const UIKIT_DIR = path.resolve('node_modules/uikit');
 const UIKIT_CSS_DIR = path.join(UIKIT_DIR, 'dist/css');
@@ -29,7 +30,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        include: [JSX_DIR, MODELS_DIR, COLLECTIONS_DIR],
+        include: [JSX_DIR, MODELS_DIR, COLLECTIONS_DIR, UTILS_DIR],
         loader: 'babel',
         query: {
           presets: ['es2015', 'react'],
@@ -65,6 +66,7 @@ module.exports = {
       LESS_COMPONENTS_DIR,
       MODELS_DIR,
       COLLECTIONS_DIR,
+      UTILS_DIR,
       UIKIT_COMPONENTS_JS_DIR,
       UIKIT_COMPONENTS_CSS_DIR,
       UIKIT_CSS_DIR,
