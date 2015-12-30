@@ -21,19 +21,22 @@ class Profile(models.Model):
         ordering = ['-rating']
 
 class Event(models.Model):
+    title = models.CharField(max_length=200)
+    host = models.CharField(max_length=200)
+    food = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    description = models.CharField(max_length=500, blank=True)
+    latitude = models.CharField(max_length=40)
+    longitude = models.CharField(max_length=40)
+    created = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
+    """
     user = models.ForeignKey(User, related_name = 'my_events')
-    title = models.CharField(max_length = 90)
-    host = models.CharField(max_length = 40)
-    event_description = models.CharField(max_length = 300)
-    menu_description = models.CharField(max_length = 200)
-    location_description = models.CharField(max_length = 150)
-    latitude = models.DecimalField(max_digits = 19, decimal_places = 16)
-    longitude = models.DecimalField(max_digits = 19, decimal_places = 16)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
     stars = models.IntegerField(blank = True, default = 0)
     star_givers = models.ManyToManyField(User)
-    timestamp = models.DateTimeField(auto_now_add = True)
+    """
 
 class Comment(models.Model):
     content = models.CharField(max_length = 160)

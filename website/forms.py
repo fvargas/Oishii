@@ -15,16 +15,17 @@ class EventForm(forms.ModelForm):
 
     class Meta:
         model = Event
-        fields = ['title', 'host', 'event_description', 'menu_description',
-                  'location_description', 'latitude', 'longitude',
-                  'start_date', 'end_date']
-        labels = {
-            'event_description': _('Event Description'),
-            'menu_description': _('Menu Description'),
-            'location_description': _('Location Description'),
-            'start_date': _('Start Date'),
-            'end_date': _('End Date'),
-        }
+        fields = [
+            'title',
+            'host',
+            'food',
+            'location',
+            'start',
+            'end',
+            'description',
+            'latitude',
+            'longitude',
+        ]
 
 class EventStarForm(forms.Form):
     event_id = forms.IntegerField()

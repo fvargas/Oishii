@@ -78,7 +78,8 @@ module.exports = {
       React: 'react',
       Backbone: 'backbone',
       $: 'jquery',
-      // uikit expects these two jquery variables to be available globally
+      // uikit (and possibly others) expect these two jquery variables to be
+      // available globally
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
     }),

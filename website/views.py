@@ -10,13 +10,14 @@ from django.views.decorators.http import require_http_methods
 from django.db import transaction
 from django.core.exceptions import ObjectDoesNotExist
 
+import json
+
 from models import *
 from forms import *
 
 @ensure_csrf_cookie
 def home(request):
-    context = { 'user': request.user, 'event_form': EventForm() }
-    return render(request, 'App.html', context)
+    return render(request, 'App.html')
 
 @ensure_csrf_cookie
 def login_page(request):
@@ -71,58 +72,79 @@ def logout_user(request):
 
     return JsonResponse(response)
 
-@require_http_methods(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'])
 def events(request):
-    events = Event.objects.all()
+    def get_events(request):
+        events = Event.objects.all()
 
-    events_data = []
-    for event in events:
-        if not request.user.is_authenticated():
-            is_starred = False
-        else:
-            try:
-                event.star_givers.all().get(id = request.user.id)
-            except ObjectDoesNotExist:
+        events_data = []
+        for event in events:
+            """
+            if not request.user.is_authenticated():
                 is_starred = False
             else:
-                is_starred = True
+                try:
+                    event.star_givers.all().get(id = request.user.id)
+                except ObjectDoesNotExist:
+                    is_starred = False
+                else:
+                    is_starred = True
+            """
 
-        events_data.append({
-            'title': event.title,
-            'latitude': event.latitude,
-            'longitude': event.longitude,
+            events_data.append({
+                'title': event.title,
+                'latitude': event.latitude,
+                'longitude': event.longitude,
+                'id': event.id,
+                'html': render_to_string('website/event.html', { 'event': event })#, 'is_starred': is_starred })
+            })
+
+        return JsonResponse(events_data, safe=False)
+
+    @transaction.atomic
+    def create_event(request):
+        '''if not request.user.is_authenticated():
+            return HttpResponse()'''
+        from datetime import datetime
+
+        event_data = json.loads(request.body)
+        event = Event(
+            title=event_data['title'],
+            host=event_data['host'],
+            food=event_data['food'],
+            location=event_data['location'],
+            start=datetime.today(), # temporary
+            end=datetime.today(), # temporary
+            description=event_data['description'],
+            latitude=event_data['latitude'],
+            longitude=event_data['longitude'],
+        )
+        event.save()
+        return HttpResponse() # temporary
+
+        event_form = EventForm(request.POST, instance=event)
+
+        if not event_form.is_valid():
+            # Signal error in form information
+            return JsonResponse({})
+
+        event_form.save()
+
+        event_data = {
             'id': event.id,
-            'html': render_to_string('website/event.html', { 'event': event, 'is_starred': is_starred })
-        })
+            'title': event_form.cleaned_data['title'],
+            'latitude': event_form.cleaned_data['latitude'],
+            'longitude': event_form.cleaned_data['longitude'],
+            'html': render_to_string('website/event.html', { 'event': event })
+        }
 
-    return JsonResponse(events_data, safe=False)
+        return JsonResponse(event_data)
 
-@transaction.atomic
-def create_event(request):
-    if not request.method == 'POST':
-        return redirect('website_home')
-    if not request.user.is_authenticated():
-        return JsonResponse({})
-
-    user = request.user
-    event = Event(user = user)
-    event_form = EventForm(request.POST, instance = event)
-
-    if not event_form.is_valid():
-        # Signal error in form information
-        return JsonResponse({})
-
-    event_form.save()
-
-    event_data = {
-        'id': event.id,
-        'title': event_form.cleaned_data['title'],
-        'latitude': event_form.cleaned_data['latitude'],
-        'longitude': event_form.cleaned_data['longitude'],
-        'html': render_to_string('website/event.html', { 'event': event })
-    }
-
-    return JsonResponse(event_data)
+    if request.method == 'GET':
+        return get_events(request)
+    elif request.method == 'POST':
+        return create_event(request)
+    else:
+        return HttpResponse()
 
 @transaction.atomic
 @ensure_csrf_cookie
