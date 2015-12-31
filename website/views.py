@@ -106,15 +106,15 @@ def events(request):
             return HttpResponse()'''
         try:
             event_data = json.loads(request.body)
-            EventForm(event_data).save()
+            event = EventForm(event_data).save()
         except ValueError:
             return HttpResponseBadRequest()
 
         event_data = {
+            'title': event.title,
+            'latitude': event.latitude,
+            'longitude': event.longitude,
             'id': event.id,
-            'title': event_form.cleaned_data['title'],
-            'latitude': event_form.cleaned_data['latitude'],
-            'longitude': event_form.cleaned_data['longitude'],
             'html': render_to_string('website/event.html', { 'event': event })
         }
 

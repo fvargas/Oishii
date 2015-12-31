@@ -9,7 +9,14 @@ export default class CreateEventForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.state = this.getFormDefaults();
+
+    this.handleChange = this.handleChange.bind(this);
+    this.createEvent = this.createEvent.bind(this);
+  }
+
+  getFormDefaults() {
+    return {
       title: '',
       host: '',
       food: '',
@@ -19,9 +26,6 @@ export default class CreateEventForm extends React.Component {
       duration: '',
       description: '',
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.createEvent = this.createEvent.bind(this);
   }
 
   handleChange() {
@@ -40,26 +44,53 @@ export default class CreateEventForm extends React.Component {
   createEvent(e) {
     e.preventDefault();
 
-    const formModel = new CreateEventFormModel({
-      title: this.state.title,
-      host: this.state.host,
-      food: this.state.food,
-      location: this.state.location,
-      date: this.state.date,
-      time: this.state.time,
-      duration: this.state.duration,
-      description: this.state.description,
-      latitude: this.props.latitude,
-      longitude: this.props.longitude,
-    });
+    function callback() {
+      const formModel = new CreateEventFormModel({
+        title: this.state.title,
+        host: this.state.host,
+        food: this.state.food,
+        location: this.state.location,
+        date: this.state.date,
+        time: this.state.time,
+        duration: this.state.duration,
+        description: this.state.description,
+        latitude: this.props.latitude,
+        longitude: this.props.longitude,
+      });
 
-    if (!formModel.isValid()) {
-      console.log(formModel.validationError);
-      // TODO: Provide validation feedback
-      return;
+      if (!formModel.isValid()) {
+        console.error(formModel.validationError);
+        // TODO: Provide validation feedback
+        return;
+      }
+
+      const success = model => {
+        this.props.eventCollection.trigger('new', model);
+        this.clearForm();
+      }
+
+      this.props.eventCollection.create(
+        formModel.getNormalizedModel(),
+        { success: success }
+      );
     }
 
-    this.props.eventCollection.create(formModel.getNormalizedModel());
+    /**
+     * The onChange event for the date and time fields may not trigger when
+     * the values are mutated programatically by the datepicker and timepicker
+     * components. Thus, we update their state prior to processing the data.
+     */
+    this.setState(
+      {
+        date: this.refs.date.value,
+        time: this.refs.time.value,
+      },
+      callback
+    );
+  }
+
+  clearForm() {
+    this.setState(this.getFormDefaults());
   }
 
   render() {

@@ -17,6 +17,7 @@ const UIKIT_CSS_DIR = path.join(UIKIT_DIR, 'dist/css');
 const UIKIT_COMPONENTS_JS_DIR = path.join(UIKIT_DIR, 'dist/js/components');
 const UIKIT_COMPONENTS_CSS_DIR = path.join(UIKIT_DIR, 'dist/css/components');
 const MAP_ICONS_DIR = path.resolve('node_modules/map-icons');
+const MAP_ICONS_JS_DIR = path.join(MAP_ICONS_DIR, 'dist/js');
 const MAP_ICONS_CSS_DIR = path.join(MAP_ICONS_DIR, 'dist/css');
 
 module.exports = {
@@ -70,6 +71,7 @@ module.exports = {
       UIKIT_COMPONENTS_JS_DIR,
       UIKIT_COMPONENTS_CSS_DIR,
       UIKIT_CSS_DIR,
+      MAP_ICONS_JS_DIR,
       MAP_ICONS_CSS_DIR,
     ],
   },
