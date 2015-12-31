@@ -1,6 +1,6 @@
 export default class EventCollection extends Backbone.Collection {
-  constructor() {
-    super();
+  constructor(...args) {
+    super(...args);
     this.url = '/events';
   }
 }

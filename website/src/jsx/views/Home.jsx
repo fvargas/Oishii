@@ -9,7 +9,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: new EventCollection(),
+      eventCollection: new EventCollection(),
       latitude: 0,
       longitude: 0,
     };
@@ -17,7 +17,7 @@ export default class Home extends React.Component {
   }
 
   componentWillMount() {
-    this.state.events.fetch();
+    this.state.eventCollection.fetch();
   }
 
   handleLatLngSelect(lat, lng) {
@@ -30,12 +30,12 @@ export default class Home extends React.Component {
         <Header showSideNav={ () => this.refs.sideNav.showSideNav() } />
         <SideNav ref='sideNav' />
         <Map
-          eventCollection={ this.state.events }
+          eventCollection={ this.state.eventCollection }
           showCreateEventModal={ () => this.refs.createEventModal.showModal() }
           onLatLngSelect={ this.handleLatLngSelect }
         />
         <CreateEventModal
-          eventCollection={ this.state.events }
+          eventCollection={ this.state.eventCollection }
           latitude={ this.state.latitude }
           longitude={ this.state.longitude }
           ref='createEventModal'

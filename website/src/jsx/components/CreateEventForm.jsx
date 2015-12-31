@@ -3,10 +3,12 @@ import 'datepicker.almost-flat.css';
 import 'timepicker.js';
 import 'autocomplete.js';
 import 'autocomplete.almost-flat.css';
+import CreateEventFormModel from 'CreateEventFormModel.js';
 
 export default class CreateEventForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       title: '',
       host: '',
@@ -17,6 +19,7 @@ export default class CreateEventForm extends React.Component {
       duration: '',
       description: '',
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.createEvent = this.createEvent.bind(this);
   }
@@ -37,18 +40,26 @@ export default class CreateEventForm extends React.Component {
   createEvent(e) {
     e.preventDefault();
 
-    this.props.eventCollection.create({
-      title: this.refs.title.value,
-      host: this.refs.host.value,
-      food: this.refs.food.value,
-      location: this.refs.location.value,
-      date: this.refs.date.value,
-      time: this.refs.time.value,
-      duration: this.refs.duration.value,
-      description: this.refs.description.value,
+    const formModel = new CreateEventFormModel({
+      title: this.state.title,
+      host: this.state.host,
+      food: this.state.food,
+      location: this.state.location,
+      date: this.state.date,
+      time: this.state.time,
+      duration: this.state.duration,
+      description: this.state.description,
       latitude: this.props.latitude,
       longitude: this.props.longitude,
     });
+
+    if (!formModel.isValid()) {
+      console.log(formModel.validationError);
+      // TODO: Provide validation feedback
+      return;
+    }
+
+    this.props.eventCollection.create(formModel.getNormalizedModel());
   }
 
   render() {

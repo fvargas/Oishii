@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
@@ -104,30 +104,11 @@ def events(request):
     def create_event(request):
         '''if not request.user.is_authenticated():
             return HttpResponse()'''
-        from datetime import datetime
-
-        event_data = json.loads(request.body)
-        event = Event(
-            title=event_data['title'],
-            host=event_data['host'],
-            food=event_data['food'],
-            location=event_data['location'],
-            start=datetime.today(), # temporary
-            end=datetime.today(), # temporary
-            description=event_data['description'],
-            latitude=event_data['latitude'],
-            longitude=event_data['longitude'],
-        )
-        event.save()
-        return HttpResponse() # temporary
-
-        event_form = EventForm(request.POST, instance=event)
-
-        if not event_form.is_valid():
-            # Signal error in form information
-            return JsonResponse({})
-
-        event_form.save()
+        try:
+            event_data = json.loads(request.body)
+            EventForm(event_data).save()
+        except ValueError:
+            return HttpResponseBadRequest()
 
         event_data = {
             'id': event.id,
@@ -144,7 +125,7 @@ def events(request):
     elif request.method == 'POST':
         return create_event(request)
     else:
-        return HttpResponse()
+        return HttpResponseBadRequest()
 
 @transaction.atomic
 @ensure_csrf_cookie

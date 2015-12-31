@@ -3,29 +3,10 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from models import Event, Comment
 
-
-# Required for setting custom form labels
-from django.utils.translation import ugettext_lazy as _
-
-DATE_INPUT_FORMATS = ['%d %B, %Y']
-
 class EventForm(forms.ModelForm):
-    start_date = forms.DateTimeField(input_formats = DATE_INPUT_FORMATS)
-    end_date = forms.DateTimeField(input_formats = DATE_INPUT_FORMATS)
-
     class Meta:
         model = Event
-        fields = [
-            'title',
-            'host',
-            'food',
-            'location',
-            'start',
-            'end',
-            'description',
-            'latitude',
-            'longitude',
-        ]
+        fields = '__all__'
 
 class EventStarForm(forms.Form):
     event_id = forms.IntegerField()
